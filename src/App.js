@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
+import ListItem from './components/ListItem';
+import AddItem from './components/AddItem';
+
+const initialList = [
+  1, 2 ,3
+]
+
 function App() {
+  const [list, setList] = useState(initialList);
+
+  function incrementNumber(index){
+    
+    const newList = [...list];
+    newList[index]++;
+    setList(newList);
+  }
+
+  function decrementNumber(index){
+    const newList = [...list];
+    newList[index]--;
+    setList(newList);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <ListItem list={list} incrementNumber={incrementNumber} decrementNumber={decrementNumber}/>
+      </div>
+       <div>
+        <AddItem list={list} setList={setList} />
+       </div>
     </div>
   );
 }
